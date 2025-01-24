@@ -66,10 +66,13 @@ def transform_w(minw : float, maxw : float, w : float) -> float:
     return utils.lerp(0.001, 10, w)
 
 def main():
-
     args = parser.parse_args()
-    root_node = "@mana:schizo.vip"
-    edges = explore(args.filename, root_node, 15, 5)
+    root_node = args.root
+    if args.width == None:
+        args.width = 15
+    if args.depth == None:
+        args.depth = 5
+    edges = explore(args.filename, root_node, int(args.width), int(args.depth))
     G = nx.Graph()
 
     processed = set()
